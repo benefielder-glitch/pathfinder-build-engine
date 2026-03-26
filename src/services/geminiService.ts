@@ -1,17 +1,14 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// 1. Get the Key (Vite looks for the VITE_ prefix we set in GitHub)
-const API_KEY = (import.meta as any).env?.VITE_GEMINI_API_KEY || "";
+// We use 'as any' to stop TypeScript from blocking the build
+const meta = (import.meta as any);
+const API_KEY = meta.env?.VITE_GEMINI_API_KEY || "";
 
-// 2. Initialize the AI (with a fallback to prevent build crashes)
-let genAI: any = null;
-if (API_KEY) {
-  genAI = new GoogleGenerativeAI(API_KEY);
-}
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 export async function generatePathfinderBuild(prompt: string) {
-  if (!API_KEY || !genAI) {
-    throw new Error("The Abyss is locked. (API Key missing or invalid)");
+  if (!API_KEY) {
+    throw new Error("The Abyss is locked. (API Key missing)");
   }
 
   try {
