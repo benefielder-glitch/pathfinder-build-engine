@@ -1,0 +1,5 @@
+{
+  "name": "Pathfinder: WotR Unfair Build Engine",
+  "description": "Generate meta-optimized character builds for Pathfinder: Wrath of the Righteous Unfair mode.",
+  "requestFramePermissions": []
+}
