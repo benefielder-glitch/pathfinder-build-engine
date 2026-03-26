@@ -23,10 +23,21 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Check which folder exists
+        id: check_path
+        run: |
+          if [ -d "./dist" ]; then
+            echo "path=./dist" >> $GITHUB_OUTPUT
+          elif [ -d "./build" ]; then
+            echo "path=./build" >> $GITHUB_OUTPUT
+          else
+            echo "Error: Neither dist nor build folder found."
+            exit 1
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build # If this fails later, we will try changing 'dist' to 'build'
+          path: ${{ steps: check_path.outputs.path }}
 
   deploy:
     needs: build
