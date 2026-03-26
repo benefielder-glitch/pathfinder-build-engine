@@ -1,1 +1,14 @@
-Note: I am setting the path to ./ (the root)
+# Note: I am setting the path to ./ (the root)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Add your deployment steps here
